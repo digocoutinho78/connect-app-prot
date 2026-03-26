@@ -3,6 +3,10 @@ import { useNavigate } from "react-router";
 import { Fingerprint } from "lucide-react";
 import logoImage from "figma:asset/d6754dfbde50ea97a075ec4e9d3e03a86b0264a9.png";
 import backgroundImage from "figma:asset/4880b469a6272c65f7cf4091f2e31e23615e3970.png";
+import { setAuthenticated } from "../auth";
+
+const DEFAULT_LOGIN_USER = "neki";
+const DEFAULT_LOGIN_PASSWORD = "nekid1000";
 
 export function Login() {
   const navigate = useNavigate();
@@ -10,6 +14,10 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const validUser = import.meta.env.VITE_LOGIN_USER || DEFAULT_LOGIN_USER;
+  const validPassword =
+    import.meta.env.VITE_LOGIN_PASSWORD || DEFAULT_LOGIN_PASSWORD;
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,8 +27,8 @@ export function Login() {
     // Simular autenticação
     setTimeout(() => {
       setLoading(false);
-      if (username && password) {
-        // Temporariamente desabilitado - redirecionando direto para seleção de bandeira
+      if (username === validUser && password === validPassword) {
+        setAuthenticated();
         navigate("/brand-selection");
       } else {
         setError("Credenciais inválidas");
