@@ -16,7 +16,7 @@ interface Notification {
   read: boolean;
 }
 
-const mockNotifications: Notification[] = [
+export const mockNotifications: Notification[] = [
   {
     id: '1',
     type: 'success',
