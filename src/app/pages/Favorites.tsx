@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Header } from '../components/Header';
-import { Star, Package, TrendingUp } from 'lucide-react';
+import { Star, Package, TrendingUp, Search } from 'lucide-react';
 import { LocationIcon } from '../components/icons/LocationIcon';
 import { useBrand, getBackgroundImage } from '../contexts/BrandContext';
 
@@ -9,10 +9,10 @@ interface FavoriteProduct {
   id: string;
   name: string;
   ean: string;
-  store: string;
-  storeId: string;
+    // store: string;
+    // storeId: string;
   stock: number;
-  distance: string;
+  // distance: string;
   trend: 'up' | 'down' | 'stable';
 }
 
@@ -26,33 +26,39 @@ export function Favorites() {
       id: '1',
       name: 'DIPIRONA SÓDICA 500MG 10 COMP',
       ean: '7891234567890',
-      store: 'DML-30 BANGU',
-      storeId: '1',
+      // store: 'DML-30 BANGU',
+      // storeId: '1',
       stock: 245,
-      distance: '0.5 km',
+      // distance: '0.5 km',
       trend: 'up'
     },
     {
       id: '2',
       name: 'PARACETAMOL 750MG 20 COMP',
       ean: '7891234567891',
-      store: 'DML 002 - CENTRO',
-      storeId: '2',
+      // store: 'DML 002 - CENTRO',
+      // storeId: '2',
       stock: 180,
-      distance: '1.2 km',
+      // distance: '1.2 km',
       trend: 'stable'
     },
     {
       id: '3',
       name: 'IBUPROFENO 600MG 30 COMP',
       ean: '7891234567892',
-      store: 'DML 003 - VILA NOVA',
-      storeId: '3',
+      // store: 'DML 003 - VILA NOVA',
+      // storeId: '3',
       stock: 92,
-      distance: '2.8 km',
+      // distance: '2.8 km',
       trend: 'down'
     }
   ]);
+
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const filteredFavorites = favorites.filter(product =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const removeFavorite = (productId: string) => {
     setFavorites(favorites.filter(fav => fav.id !== productId));
@@ -83,8 +89,30 @@ export function Favorites() {
           {favorites.length > 0 && (
             <div className="mb-4">
               <p className="text-[#717171] font-medium text-sm">
-                RESULTADO: {favorites.length} {favorites.length === 1 ? 'PRODUTO' : 'PRODUTOS'}
+                RESULTADO: {filteredFavorites.length} {filteredFavorites.length === 1 ? 'PRODUTO' : 'PRODUTOS'}
               </p>
+            </div>
+          )}
+
+          {/* Search Bar */}
+          {favorites.length > 0 && (
+            <div className="flex gap-2 mb-4">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#717171]" />
+                <input
+                  type="text"
+                  placeholder="Buscar Produto"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full h-[50px] pl-10 pr-4 rounded-[10px] border border-[#d1d5dc] bg-white text-base text-[#1a1a1a] placeholder:text-[#1a1a1a]/50 focus:outline-none focus:border-[#006eb4] transition-colors"
+                />
+              </div>
+              <button
+                onClick={() => {}}
+                className="w-[68px] h-[50px] bg-[#006eb4] rounded-[10px] flex items-center justify-center shrink-0 hover:bg-[#005a94] transition-colors active:scale-95"
+              >
+                <Search className="w-5 h-5 text-white" />
+              </button>
             </div>
           )}
 
@@ -109,11 +137,11 @@ export function Favorites() {
 
           {/* Favorites List */}
           <div className="space-y-3">
-            {favorites.map((product) => (
+            {filteredFavorites.map((product) => (
               <div 
                 key={product.id} 
                 className="card-base p-4 cursor-pointer hover:shadow-md transition-shadow"
-                onClick={() => navigate(`/products/${product.id}?storeId=${product.storeId}`)}
+                onClick={() => navigate(`/products/${product.id}`)}
               >
                 <div className="flex items-start gap-3">
                   {/* <div className="w-12 h-12 bg-gradient-to-br from-gray-200 to-gray-100 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -132,13 +160,13 @@ export function Favorites() {
                     {/* <p className="text-auxiliary text-[#717171] mb-2 text-[20px]">EAN: {product.ean}</p> */}
                     
                     {/* Store Info */}
-                    <div className="flex items-center gap-4 text-auxiliary text-[#717171] mb-2">
+                    {/* <div className="flex items-center gap-4 text-auxiliary text-[#717171] mb-2">
                       <span className="flex items-center gap-1 text-[16px] whitespace-nowrap">
                         <LocationIcon className="w-3.5 h-3.5" />
                         {product.distance}
                       </span>
                       <span className="font-medium text-[16px]">{product.store}</span>
-                    </div>
+                    </div> */}
                     
                     {/* Stock Info */}
                     <div className="flex items-center gap-2">

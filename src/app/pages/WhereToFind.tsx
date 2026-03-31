@@ -1,6 +1,6 @@
 import { Header } from '../components/Header';
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router';
+import { useParams, useNavigate, useLocation } from 'react-router';
 import { Navigation, Phone } from 'lucide-react';
 import { LocationIcon } from '../components/icons/LocationIcon';
 import { FileText, BarChart3 } from 'lucide-react';
@@ -68,6 +68,7 @@ const mockLocations: StoreLocation[] = [
 export function WhereToFind() {
   const { productId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [selectedStore, setSelectedStore] = useState<StoreLocation | null>(null);
 
   const handleOpenGoogleMaps = (store: StoreLocation) => {
@@ -164,7 +165,7 @@ export function WhereToFind() {
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
         <div className="flex">
           <button 
-            onClick={() => navigate(`/products/${productId}`)}
+            onClick={() => navigate('/stores-by-product', { state: { productId, productName: location.state?.productName } })}
             className="flex-1 flex flex-col items-center justify-center py-3 transition-all active:scale-95 text-gray-500 hover:text-[#006eb4] hover:bg-gray-50"
           >
             <FileText className="w-6 h-6 mb-1" />

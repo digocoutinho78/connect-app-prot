@@ -1,6 +1,6 @@
 import { Header } from '../components/Header';
 import { useState } from 'react';
-import { useParams, useNavigate } from 'react-router';
+import { useParams, useNavigate, useLocation } from 'react-router';
 import { Package, Download, FileText, BarChart3 } from 'lucide-react';
 import { LocationIcon } from '../components/icons/LocationIcon';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -70,6 +70,7 @@ const mockData = {
 export function Sales() {
   const { productId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState<'normal' | 'pbm' | 'anual'>('normal');
 
   // Mock product data - in production, this would come from API
@@ -91,12 +92,14 @@ export function Sales() {
   };
 
   return (
-    <div 
-      className="min-h-screen pb-24 bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
+    <div className="h-screen flex flex-col relative">
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      />
       <Header pageTitle="VENDAS" />
-      <div className="p-4">
+      <div className="flex-1 overflow-y-auto relative">
+      <div className="p-4 pb-24">
         {/* Product Info Card */}
         <div className="bg-white rounded-[10px] shadow-sm p-4 mb-6">
           <div className="flex items-start gap-3">
@@ -326,12 +329,13 @@ export function Sales() {
           </div>
         </div>
       </div>
+      </div>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+      <nav className="bg-white border-t border-gray-200 shadow-lg shrink-0">
         <div className="flex">
           <button 
-            onClick={() => navigate(`/products/${productId}`)}
+            onClick={() => navigate('/stores-by-product', { state: { productId, productName: location.state?.productName } })}
             className="flex-1 flex flex-col items-center justify-center py-3 transition-all active:scale-95 text-gray-500 hover:text-[#006eb4] hover:bg-gray-50"
           >
             <FileText className="w-6 h-6 mb-1" />

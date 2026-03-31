@@ -192,11 +192,12 @@ export function StoresByProduct() {
       />
       
       {/* Content Layer */}
-      <div className="relative min-h-screen pb-20">
+      <div className="relative h-screen flex flex-col">
       <Header 
         pageTitle="Produto"
       />
 
+      <div className="flex-1 overflow-y-auto pb-20">
       <div className="p-4 space-y-4">
         {/* Exibe o produto selecionado */}
         {productName && (
@@ -478,12 +479,13 @@ export function StoresByProduct() {
           </div>
         )}
       </div>
+      </div>
 
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
         <div className="flex">
           <button 
-            onClick={() => navigate(`/products/${productId}`)}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex-1 flex flex-col items-center justify-center py-3 transition-all active:scale-95 text-[#006eb4] bg-[#006eb4]/5"
           >
             <FileText className="w-6 h-6 mb-1 stroke-[2.5]" />
@@ -498,16 +500,13 @@ export function StoresByProduct() {
             <span className="font-medium text-[14px]">Vendas</span>
           </button>
 
-          {/* <button 
-            className={`flex-1 flex flex-col items-center justify-center py-3 transition-all active:scale-95 ${
-              hasSearched 
-                ? 'text-[#006eb4] bg-[#006eb4]/5' 
-                : 'text-gray-500 hover:text-[#006eb4] hover:bg-gray-50'
-            }`}
+          <button 
+            onClick={() => navigate(`/where-to-find/${productId}`, { state: { productName } })}
+            className="flex-1 flex flex-col items-center justify-center py-3 transition-all active:scale-95 text-gray-500 hover:text-[#006eb4] hover:bg-gray-50"
           >
-            <LocationIcon className={`w-6 h-6 mb-1 ${hasSearched ? 'stroke-[2.5]' : ''}`} />
-            <span className={`${hasSearched ? 'font-semibold' : 'font-medium'} text-[14px]`}>Onde Tem</span>
-          </button> */}
+            <LocationIcon className="w-6 h-6 mb-1" />
+            <span className="font-medium text-[14px]">Onde Tem</span>
+          </button>
         </div>
       </nav>
       </div>
