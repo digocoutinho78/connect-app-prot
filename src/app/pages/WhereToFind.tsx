@@ -78,7 +78,7 @@ export function WhereToFind() {
 
   return (
     <div 
-      className="min-h-screen flex flex-col bg-cover bg-center bg-no-repeat"
+      className="h-screen flex flex-col bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <Header pageTitle="ONDE TEM" />
@@ -162,7 +162,7 @@ export function WhereToFind() {
       </div>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+      <nav className="bg-white border-t border-gray-200 shadow-lg shrink-0">
         <div className="flex">
           <button 
             onClick={() => navigate('/stores-by-product', { state: { productId, productName: location.state?.productName } })}

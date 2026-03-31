@@ -51,16 +51,18 @@ export function ProductDetailOutOfStock() {
   };
 
   return (
-    <div 
-      className="min-h-screen pb-24 bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
+    <div className="h-screen flex flex-col relative">
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      />
       {/* Header com nome da loja */}
       <Header 
         pageTitle={store.name}
       />
 
-      <div className="p-4 space-y-6">
+      <div className="flex-1 overflow-y-auto relative">
+      <div className="p-4 pb-24 space-y-6">
         {/* Alerta de produto sem estoque */}
         {/* <div className="bg-red-50 border-2 border-red-500 rounded-[10px] p-4 flex items-start gap-3 shadow-sm">
           <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
@@ -204,9 +206,10 @@ export function ProductDetailOutOfStock() {
           Sugerir Faceamento
         </button>
       </div>
+      </div>
 
       {/* Footer customizado com 2 botões: Estoque e Vendas */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 safe-area-bottom shadow-lg">
+      <nav className="bg-white border-t border-gray-200 safe-area-bottom shadow-lg shrink-0">
         <div className="flex">
           <button 
             className="flex-1 flex flex-col items-center justify-center py-3 transition-all active:scale-95 text-[#006eb4] bg-[#006eb4]/5"

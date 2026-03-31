@@ -368,16 +368,18 @@ export function ProductDetail() {
   };
 
   return (
-    <div 
-      className="min-h-screen pb-24 bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
+    <div className="h-screen flex flex-col relative">
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      />
       {/* Header com nome da loja */}
       <Header 
         pageTitle={store.name}
       />
 
-      <div className="p-4 space-y-6">
+      <div className="flex-1 overflow-y-auto relative">
+      <div className="p-4 pb-24 space-y-6">
         {/* Nome do produto */}
         <div className="bg-white rounded-[10px] shadow-sm p-5 relative min-h-[80px] flex items-center">
           <h2 className="text-[#006eb4] font-bold text-lg leading-snug text-left pr-12 break-words">
@@ -465,9 +467,10 @@ export function ProductDetail() {
           Sugerir Faceamento
         </button>
       </div>
+      </div>
 
       {/* Footer customizado com 2 botões: Estoque e Vendas */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 safe-area-bottom shadow-lg">
+      <nav className="bg-white border-t border-gray-200 safe-area-bottom shadow-lg shrink-0">
         <div className="flex">
           <button 
             className="flex-1 flex flex-col items-center justify-center py-3 transition-all active:scale-95 text-[#006eb4] bg-[#006eb4]/5"

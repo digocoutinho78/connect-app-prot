@@ -98,12 +98,14 @@ export function ProductSales() {
   };
 
   return (
-    <div 
-      className="min-h-screen pb-24 bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${backgroundImage})` }}
-    >
+    <div className="h-screen flex flex-col relative">
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+      />
       <Header pageTitle={store.name} />
-      <div className="p-4">
+      <div className="flex-1 overflow-y-auto relative">
+      <div className="p-4 pb-24">
         {/* Product Info Card */}
         <div className="bg-white rounded-[10px] shadow-sm p-4 mb-6 relative">
           <div className="flex items-start gap-3">
@@ -343,9 +345,10 @@ export function ProductSales() {
           </div>
         </div>
       </div>
+      </div>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+      <nav className="bg-white border-t border-gray-200 shadow-lg shrink-0">
         <div className="flex">
           <button 
             onClick={() => navigate(`/products/${productId}`)}

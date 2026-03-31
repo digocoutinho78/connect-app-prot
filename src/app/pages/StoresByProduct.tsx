@@ -482,7 +482,7 @@ export function StoresByProduct() {
       </div>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+      <nav className="bg-white border-t border-gray-200 shadow-lg shrink-0">
         <div className="flex">
           <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
