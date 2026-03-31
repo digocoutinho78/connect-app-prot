@@ -2,14 +2,15 @@ import { useNavigate } from 'react-router';
 import { Header } from '../components/Header';
 import { Calendar, Package, TrendingUp, AlertCircle, CheckCircle, Phone } from 'lucide-react';
 import backgroundImage from 'figma:asset/ca44b9278ade571ce23c788ab07a7af85c0382b9.png';
-import productImage from 'figma:asset/fd91ecaee5de57563cdceace6678882d11a1b09d.png';
+// import productImage from 'figma:asset/fd91ecaee5de57563cdceace6678882d11a1b09d.png';
 
 interface Suggestion {
   id: string;
   productName: string;
-  productImage: string;
+  // productImage: string;
   currentStock: number;
   suggestedStock: number;
+  approvedStock?: number;
   date: string;
   status: 'em-analise' | 'aprovada' | 'pendente' | 'entre-em-contato';
   storeName: string;
@@ -19,7 +20,7 @@ const mockSuggestions: Suggestion[] = [
   {
     id: '1',
     productName: 'DORFLEX 300+35+50MG 10CPR',
-    productImage: productImage,
+    // productImage: productImage,
     currentStock: 45,
     suggestedStock: 120,
     date: '28/02/2026',
@@ -29,9 +30,10 @@ const mockSuggestions: Suggestion[] = [
   {
     id: '2',
     productName: 'DIPIRONA 500MG 20CPR',
-    productImage: productImage,
+    // productImage: productImage,
     currentStock: 80,
     suggestedStock: 200,
+    approvedStock: 200,
     date: '27/02/2026',
     status: 'aprovada',
     storeName: 'DML 020 - NOVA IGUACU'
@@ -39,7 +41,7 @@ const mockSuggestions: Suggestion[] = [
   {
     id: '3',
     productName: 'PARACETAMOL 750MG 10CPR',
-    productImage: productImage,
+    // productImage: productImage,
     currentStock: 25,
     suggestedStock: 150,
     date: '26/02/2026',
@@ -49,7 +51,7 @@ const mockSuggestions: Suggestion[] = [
   {
     id: '4',
     productName: 'IBUPROFENO 600MG 30CPR',
-    productImage: productImage,
+    // productImage: productImage,
     currentStock: 60,
     suggestedStock: 180,
     date: '25/02/2026',
@@ -157,21 +159,30 @@ export function SuggestionsStatus() {
               </div>
 
               {/* Informações de estoque */}
-              <div className="grid grid-cols-2 gap-4 pt-3 border-t border-gray-100">
+              <div className={`grid gap-4 pt-3 border-t border-gray-100 ${suggestion.status === 'aprovada' ? 'grid-cols-3' : 'grid-cols-2'}`}>
                 <div>
                   <p className="text-[#717171] text-xs mb-1">Estoque Atual</p>
                   <div className="flex items-center gap-2">
-                    <Package className="w-4 h-4 text-[#717171]" />
+                    <Package className="w-4 h-4 text-[#717171] shrink-0" />
                     <p className="text-[#006eb4] font-bold text-lg">{suggestion.currentStock}</p>
                   </div>
                 </div>
                 <div>
                   <p className="text-[#717171] text-xs mb-1">Estoque Sugerido</p>
                   <div className="flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4 text-green-600" />
-                    <p className="text-green-600 font-bold text-lg">{suggestion.suggestedStock}</p>
+                    <TrendingUp className="w-4 h-4 text-[#00a63e] shrink-0" />
+                    <p className="text-[#00a63e] font-bold text-lg">{suggestion.suggestedStock}</p>
                   </div>
                 </div>
+                {suggestion.status === 'aprovada' && suggestion.approvedStock != null && (
+                  <div>
+                    <p className="text-[#717171] text-xs mb-1">Estoque Aprovado</p>
+                    <div className="flex items-center gap-2">
+                      <CheckCircle className="w-4 h-4 text-[#008236] shrink-0" />
+                      <p className="text-[#008236] font-bold text-lg">{suggestion.approvedStock}</p>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Data */}
