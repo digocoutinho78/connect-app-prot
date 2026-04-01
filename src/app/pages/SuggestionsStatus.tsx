@@ -17,16 +17,16 @@ interface Suggestion {
 }
 
 const mockSuggestions: Suggestion[] = [
-  {
-    id: '1',
-    productName: 'DORFLEX 300+35+50MG 10CPR',
-    // productImage: productImage,
-    currentStock: 45,
-    suggestedStock: 120,
-    date: '28/02/2026',
-    status: 'entre-em-contato',
-    storeName: 'DML-30 BANGU'
-  },
+  // {
+  //   id: '1',
+  //   productName: 'DORFLEX 300+35+50MG 10CPR',
+  //   // productImage: productImage,
+  //   currentStock: 45,
+  //   suggestedStock: 120,
+  //   date: '28/02/2026',
+  //   status: 'entre-em-contato',
+  //   storeName: 'DML-30 BANGU'
+  // },
   {
     id: '2',
     productName: 'DIPIRONA 500MG 20CPR',
