@@ -3,6 +3,7 @@ export const AUTH_SESSION_KEY = 'connect_auth_unlocked';
 const PUBLIC_ROUTES = new Set([
   '/',
   '/login',
+  '/forgot-password',
   '/activation-expired',
   '/activation-success',
 ]);

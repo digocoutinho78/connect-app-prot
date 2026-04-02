@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import { RootLayout } from "./layouts/RootLayout";
 import { Splash } from "./pages/Splash";
 import { Login } from "./pages/Login";
+import { ForgotPassword } from "./pages/ForgotPassword";
 import { ActivationExpired } from "./pages/ActivationExpired";
 import { ActivationSuccess } from "./pages/ActivationSuccess";
 import { BrandSelection } from "./pages/BrandSelection";
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         Component: Login,
+      },
+      {
+        path: "/forgot-password",
+        Component: ForgotPassword,
       },
       {
         path: "/activation-expired",

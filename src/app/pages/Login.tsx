@@ -67,6 +67,8 @@ export function Login() {
               </label>
               <input
                 type="text"
+                name="username"
+                autoComplete="username"
                 placeholder="Digite seu usuário"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -85,6 +87,8 @@ export function Login() {
               </label>
               <input
                 type="password"
+                name="password"
+                autoComplete="current-password"
                 placeholder="Digite sua senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -102,7 +106,7 @@ export function Login() {
 
             <button
               type="button"
-              onClick={() => navigate("/activation-expired")}
+              onClick={() => navigate("/forgot-password")}
               className="w-full text-[#006eb4] hover:text-[#006eb4] transition-colors font-bold text-[16px]"
             >
               Esqueci minha senha
